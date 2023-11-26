@@ -18,20 +18,24 @@ app.layout = html.Div([
     html.H1("Pokémon GO Data Analysis"),
     dcc.Markdown("### Welcome to an intensive analysis with data from the video game called Pokémon GO. \n We will endorse in a search for patterns of spawns for each pokémon in the data set as well as their statistics."),
    
-    # Space for images and text (you can add components here)
-
     dcc.Tabs(id='tabs', value='pokemon-tab', children=[
         dcc.Tab(label='', value='pokemon-tab', style={
-        'background-image': 'url("https://github.com/HugoDataAnalyst/poGORealDataAnalysis/raw/main/Dash/UICONS/pokemon/4_f896.png")',
-        'background-size': 'auto',
-        'background-position': 'center',
-        'color': 'black'
+            'background-image': 'url("https://github.com/HugoDataAnalyst/poGORealDataAnalysis/raw/main/Dash/UICONS/misc/pokemon.png")',
+            'background-size': 'cover',  # Use 'cover' to maintain aspect ratio and cover the entire tab
+            'background-position': 'center',
+            'color': 'black',
+            'width': '300px',
+            'height': '250px',  # Adjust the width as needed
+            'margin-right': '10px'
         },
         selected_style={
-            'background-image': 'url("https://github.com/HugoDataAnalyst/poGORealDataAnalysis/raw/main/Dash/UICONS/pokemon/4_f896.png")',
-            'background-size': 'auto',
+            'background-image': 'url("https://github.com/HugoDataAnalyst/poGORealDataAnalysis/raw/main/Dash/UICONS/misc/pokemon.png")',
+            'background-size': 'cover',
             'background-position': 'center',
-            'color': 'black'
+            'color': 'black',
+            'width': '300px',
+            'height': '250px',
+            'margin-right': '10px'
         },
         children=[
             dcc.Tabs(id='pokemon-subtabs', value='lights-festival-tab', children=[
@@ -40,9 +44,33 @@ app.layout = html.Div([
             ]),
             html.Div(id='pokemon-subtabs-content')
         ]),
-        dcc.Tab(label='Raids', value='raids-tab', style={'background-image': 'url("/path/to/raids_image.jpg")'}),
-        dcc.Tab(label='Quests', value='quests-tab', style={'background-image': 'url("/path/to/quests_image.jpg")'}),
-        dcc.Tab(label='Invasions', value='invasions-tab', style={'background-image': 'url("/path/to/invasions_image.jpg")'}),
+        dcc.Tab(label='', value='raids-tab', style={
+            'background-image': 'url("https://github.com/HugoDataAnalyst/poGORealDataAnalysis/raw/main/Dash/UICONS/misc/raid.png")',
+            'background-size': 'cover',
+            'background-position': 'center',
+            'color': 'black',
+            'width': '300px',
+            'height': '250px',
+            'margin-right': '10px'
+        }),
+        dcc.Tab(label='', value='quests-tab', style={
+            'background-image': 'url("https://github.com/HugoDataAnalyst/poGORealDataAnalysis/raw/main/Dash/UICONS/misc/quest.png")',
+            'background-size': 'cover',
+            'background-position': 'center',
+            'color': 'black',
+            'width': '300px',
+            'height': '250px',
+            'margin-right': '10px'
+        }),
+        dcc.Tab(label='', value='invasions-tab', style={
+            'background-image': 'url("https://github.com/HugoDataAnalyst/poGORealDataAnalysis/raw/main/Dash/UICONS/misc/invasion.png")',
+            'background-size': 'cover',
+            'background-position': 'center',
+            'color': 'black',
+            'width': '300px',
+            'height': '250px'
+            
+        }),
     ]),
 
     html.Div(id='tabs-content')
@@ -153,12 +181,16 @@ def update_areas_options(selected_section):
               [Input('areas-dropdown', 'value')])
 def update_selected_area_content(selected_area):
     try:
-        # Call the modified quicktestmap function and get the Plotly figure based on the selected area
-        fig = quicktestmap(f"../CSV/AreasLF/{selected_area}LF.csv")
-
-        # Convert the Plotly figure to HTML and display it in the layout
-        graph_content = dcc.Graph(figure=fig)
-        return [graph_content]
+        # Call the modified quicktestmapv2 function and get the Folium map based on the selected area
+        folium_map = quicktestmapv2(f"../CSV/AreasLF/{selected_area}LF.csv")
+        
+        # Save the Folium map as an HTML file
+        folium_map.save("folium_map.html")
+        
+        # Use html.Iframe to embed the Folium map in the Dash layout
+        iframe_content = html.Iframe(srcDoc=open("folium_map.html", "r").read(), width="100%", height="600px")
+        
+        return [iframe_content]
     except Exception as e:
         print(str(e))
         raise PreventUpdate
@@ -187,12 +219,16 @@ def update_no_event_areas_options(selected_section):
               [Input('no-event-areas-dropdown', 'value')])
 def update_no_event_selected_area_content(selected_area):
     try:
-        # Call the modified quicktestmap function and get the Plotly figure based on the selected area for "No Event"
-        fig = quicktestmapv2(f"../CSV/AreasNE/{selected_area}NE.csv")
-
-        # Convert the Plotly figure to HTML and display it in the layout
-        graph_content = dcc.Graph(figure=fig)
-        return [graph_content]
+        # Call the modified quicktestmapv2 function and get the Folium map based on the selected area
+        folium_map = quicktestmapv2(f"../CSV/AreasNE/{selected_area}NE.csv")
+        
+        # Save the Folium map as an HTML file
+        folium_map.save("folium_map_no_event.html")
+        
+        # Use html.Iframe to embed the Folium map in the Dash layout
+        iframe_content = html.Iframe(srcDoc=open("folium_map_no_event.html", "r").read(), width="100%", height="600px")
+        
+        return [iframe_content]
     except Exception as e:
         print(str(e))
         raise PreventUpdate
