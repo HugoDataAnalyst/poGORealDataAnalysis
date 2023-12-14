@@ -10,7 +10,7 @@ from folium import plugins
 sys.path.insert(0, '../Python/')  # Add the path to Python files
 from Test import quicktestmap  # Import the function
 from Test import quicktestmapv2
-
+from moretests import create_table_dashboard
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
 # Define the layout of the app
