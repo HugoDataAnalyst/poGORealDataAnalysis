@@ -914,7 +914,10 @@ mappage_content = html.Div([
         - **Pokémon Hotspots**: Identify the best spots for finding certain Pokémon, enhancing your gaming strategy.
         - **Customizable Filters**: Tailor the map to your interests by selecting individual Pokémon or multiple ones for focused insights.
 
-        **Important Note:** Remember, rarity affects data. Some Pokémon, appearing only rarely, may skew location insights. If pokémons with a lot of observations are centered in the map it means they have bias to a precise location and can be found anywhere around that area.
+        **Key Considerations:** 
+        - Rarity influences data interpretation. 
+        - Infrequent appearances of certain Pokémon may alter location insights. 
+        - When Pokémon with numerous observations are central on the map, it suggests a bias toward a specific location, indicating their potential presence in the surrounding areas.
     ''', style={'margin': '5%', 'textAlign': 'justify'})
 ], id='mappage-content')
 
