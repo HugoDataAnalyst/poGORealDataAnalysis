@@ -681,8 +681,8 @@ def generate_html_table(df_page, sort_by=None, sort_direction='asc'):
     for _, row in df_copy.iterrows():
         img_src = row["image_path"]
         img_html = html.Img(src=img_src, style={"max-width": "50px", "max-height": "50px"})
-        row_content = [html.Td(img_html, className='align-middle')] + [
-            html.Td(html.Div(row[col], className='content-cell'), className='align-middle')
+        row_content = [html.Td(img_html, className='align-middle', style={'textAlign': 'center'})] + [
+            html.Td(html.Div(row[col], className='content-cell'), className='align-middle', style={'textAlign': 'center'})
             for col in columns_to_display
         ]
         table_rows.append(html.Tr(row_content))
@@ -696,7 +696,7 @@ def generate_html_table(df_page, sort_by=None, sort_direction='asc'):
         striped=True, bordered=True, hover=True, responsive=True
     )
     # Wrap the table in a Div and apply margin styling
-    return html.Div(table_component, style={'margin': '5%', 'marginLeft': 'auto', 'marginRight': 'auto', 'width': 'fit-content'})
+    return html.Div(table_component, style={'margin': '5%', 'marginLeft': 'auto', 'marginRight': 'auto', 'maxWidth': '100%'})
 
 # Modified handle_navigation callback
 @app.callback(
