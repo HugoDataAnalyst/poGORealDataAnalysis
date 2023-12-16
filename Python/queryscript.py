@@ -148,7 +148,7 @@ def query_database(area_name, coordinates, connection, query_option):
                 pokemon_id,
                 form,
                 count_poke,
-                ROUND((count_poke / (SELECT COUNT(pokemon_id) FROM pokemonevent) * 100),10) AS percentage,
+                ROUND((count_poke / (SELECT SUM(count_poke) FROM pokemonevent) * 100),10) AS percentage,
                 avg_weight,
                 avg_height,
                 avg_size,
@@ -567,10 +567,10 @@ def query_database(area_name, coordinates, connection, query_option):
 def save_to_csv(area_name, data, query_option):
     # Define column headers for each query option
     column_headers = {
-        'areadataLF': ['pokemon_id', 'form', 'count_poke', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'avg_lat', 'avg_lon', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
-        'areadataNE': ['pokemon_id', 'form', 'count_poke', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'avg_lat', 'avg_lon', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
-        'globalLF': ['pokemon_id', 'form', 'count_poke', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
-        'globalNE': ['pokemon_id', 'form', 'count_poke', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
+        'areadataLF': ['pokemon_id', 'form', 'count_poke', 'percentage', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'avg_lat', 'avg_lon', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
+        'areadataNE': ['pokemon_id', 'form', 'count_poke', 'percentage', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'avg_lat', 'avg_lon', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
+        'globalLF': ['pokemon_id', 'form', 'count_poke', 'percentage', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
+        'globalNE': ['pokemon_id', 'form', 'count_poke', 'percentage', 'avg_weight', 'avg_height', 'avg_size', 'avg_atk', 'avg_def', 'avg_sta', 'avg_level', 'avg_iv', 'iv_100', 'iv100_percentage', 'iv_0', 'iv0_percentage', 'shinies', 'shiny_odds', 'little_top_1', 'little_top1_percentage', 'great_top_1', 'great_top1_percentage', 'ultra_top_1', 'ultra_top1_percentage'],
         'surgeglobaliv100LF': ['hourly_date', 'iv100'],
         'surgeglobaliv100NE': ['hourly_date', 'iv100'],
         'surgeglobaliv0LF': ['hourly_date', 'iv0'],
@@ -650,7 +650,7 @@ def main(host, db_name, user, password, query_option):
         #'createpvpcolumns', 'updatepvptables',
         all_query_options = [
             'areadataLF', 
-            'areadataNE', 'globalNE', 'globalLF', 
+            'areadataNE', 'globalLF', 'globalNE', 
             'surgeglobaliv100NE', 'surgegloballittletop1NE', 'surgeglobalgreattop1LF',
             'surgeglobalgreattop1NE', 'surgeglobalultratop1LF', 'surgeglobalultratop1NE'
         ]

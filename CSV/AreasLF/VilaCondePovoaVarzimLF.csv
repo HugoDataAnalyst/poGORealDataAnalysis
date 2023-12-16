@@ -1,4 +1,4 @@
-pokemon_id,form,count_poke,avg_weight,avg_height,avg_size,avg_atk,avg_def,avg_sta,avg_level,avg_iv,avg_lat,avg_lon,iv_100,iv100_percentage,iv_0,iv0_percentage,shinies,shiny_odds,little_top_1,little_top1_percentage,great_top_1,great_top1_percentage,ultra_top_1,ultra_top1_percentage
+pokemon_id,form,count_poke,percentage,avg_weight,avg_height,avg_size,avg_atk,avg_def,avg_sta,avg_level,avg_iv,avg_lat,avg_lon,iv_100,iv100_percentage,iv_0,iv0_percentage,shinies,shiny_odds,little_top_1,little_top1_percentage,great_top_1,great_top1_percentage,ultra_top_1,ultra_top1_percentage
 747,0,41196,15035.0365,8.25951377428948,0.4025224596222083,3.0181,8.8141,8.8156,8.7796,18.7799,58.687249,41.37458852482189,-8.754533902313101,24,0.0583,3,0.0073,0,0.0000,2,0.0049,3,0.0073,0,0.0000
 676,2629,41182,15029.9270,28.738441314045843,1.2004324989815345,3.0014,7.9205,7.9363,7.9119,16.5349,52.819411,41.374501550809896,-8.754539871513026,9,0.0219,9,0.0219,78,0.1894,4,0.0097,6,0.0146,9,0.0219
 592,2330,41072,14989.7810,33.814490061779225,1.1990320892382749,2.9984,7.5520,7.6047,7.6357,15.7932,50.649842,41.37446280001887,-8.754518320790368,9,0.0219,16,0.0390,82,0.1996,3,0.0073,16,0.0390,8,0.0195

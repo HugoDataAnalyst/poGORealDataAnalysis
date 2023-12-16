@@ -7,13 +7,16 @@ Add all areas and adjust proper images for the pokémons;
 
 Add script + crontab to delete temporary files;
 
-Edit combine1sttry to remove delimiter filter in dataframes?;
+Edit combine1sttry to remove delimiter filter in dataframes?; ✔
 
 Test optimization queries;✔
 
 edit queryscript.py sql code to optimize it or not;✔
 
 Test queryscript.py
+
+Verify table values positioning and Pokémon %
+Correct SQL 'percentage query' and re-think the important of some metrics
 
 Edit this README accordingly;
 
@@ -23,7 +26,9 @@ Clear queryscript.py and update it with the update table statements for the need
 
 added converttogeofence.py✔
 
-Clear old files and unnecessary ones;
+Update requirements.txt ✔
+
+Clear old files and unnecessary ones;✔
 
 Add SQL section to have the creation of the database SQL and??;
 
