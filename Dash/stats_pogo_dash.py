@@ -21,7 +21,7 @@ import plotly.graph_objects as go
 from datetime import datetime
 from surge_data import display_surge_iv100, display_surge_iv0, display_surge_little_league, display_surge_great_league, display_surge_ultra_league
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+app = dash.Dash(__name__, title='Go Analysis', update_title='Loading...', external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 
 ROWS_PER_PAGE = 10
 
@@ -850,11 +850,11 @@ homepage_content = html.Div([
             ## Summary
         ''', style={'margin': '5%', 'textAlign': 'center'}),
     dcc.Markdown('''
-            In this comprehensive analysis, we delve into an extensive dataset of Pokémon Go, shedding light on the game's dynamics and Pokémon behavior. Our exploration is rooted in a robust database, backed by MySQL, and includes a staggering total of 49,692,539 million Pokémon observations, categorized into event and non-event data.
+            In this comprehensive analysis, we delve into an extensive dataset of Pokémon Go, shedding light on the game's dynamics and Pokémon behavior. Our exploration is rooted in a robust database, backed by MySQL, and includes a staggering total of 49,692,539 Pokémon observations, categorized into event and non-event data.
         ''', style={'margin': '5%', 'textAlign': 'justify'}),
     dcc.Markdown('''
             **Highlights of the Analysis:**
-            - **Event vs. Non-Event Data:** With 27,173,604 million Pokémon recorded during events and 22,518,935 million outside these periods, our study offers insights into how special events significantly impact the gaming experience, influencing both Pokémon availability and player interactions.
+            - **Event vs. Non-Event Data:** With 27,173,604 Pokémon recorded during events and 22,518,935 outside these periods, our study offers insights into how special events significantly impact the gaming experience, influencing both Pokémon availability and player interactions.
             - **Rarity and Distribution:** Unravel the patterns of Pokémon rarity and distribution, understanding where and when you're most likely to encounter rare species.
             - **Geolocation Analysis:** Investigate how geographical locations affect Pokémon spawns, providing a tailored experience in various settings.
             - **Surge Analysis:** Decode the strategies behind Pokémon spawns, particularly during times of heightened player activity, to understand the game’s spawning algorithm better.
@@ -914,7 +914,7 @@ mappage_content = html.Div([
         - **Pokémon Hotspots**: Identify the best spots for finding certain Pokémon, enhancing your gaming strategy.
         - **Customizable Filters**: Tailor the map to your interests by selecting individual Pokémon or multiple ones for focused insights.
 
-        **Important Note:** Remember, rarity affects data. Some Pokémon, appearing only rarely, may skew location insights.
+        **Important Note:** Remember, rarity affects data. Some Pokémon, appearing only rarely, may skew location insights. If pokémons with a lot of observations are centered in the map it means they have bias to a precise location and can be found anywhere around that area.
     ''', style={'margin': '5%', 'textAlign': 'justify'})
 ], id='mappage-content')
 
@@ -1104,4 +1104,4 @@ def update_checklist_state(checklist_values):
     return checked_images
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8065)
