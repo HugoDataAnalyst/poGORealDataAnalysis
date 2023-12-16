@@ -16,7 +16,10 @@ edit queryscript.py sql code to optimize it or not;✔
 Test queryscript.py
 
 Verify table values positioning and Pokémon %
-Correct SQL 'percentage query' and re-think the important of some metrics
+Correct SQL 'percentage query' and re-think the importance of some metrics
+Verify Table Slider-bar, it's missing
+
+Add names to map visual?
 
 Edit this README accordingly;
 

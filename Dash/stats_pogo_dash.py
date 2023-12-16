@@ -53,12 +53,6 @@ def get_column_display_names(df):
     column_display_names = {
         'count_poke': 'Count Pokes',
         'percentage': 'Pokemon %',
-        'avg_weight': 'Avg Weight',
-        'avg_height': 'Avg Height',
-        'avg_size': 'Avg Size',
-        'avg_atk': 'Avg Atk',
-        'avg_def': 'Avg Def',
-        'avg_sta': 'Avg Sta',
         'avg_level': 'Avg Level',
         'iv_100': 'IV 100',
         'shinies': 'Shinies',
@@ -82,12 +76,6 @@ def round_columns(df):
 # Columns to round to 3 decimals
     columns_to_round = [
         'Pokemon %',
-        'Avg Weight',
-        'Avg Height',
-        'Avg Size',
-        'Avg Atk',
-        'Avg Def',
-        'Avg Sta',
         'Avg Level',
         'Avg IV',
         'IV 100%',
