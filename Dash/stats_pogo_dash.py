@@ -1042,7 +1042,7 @@ app.layout = html.Div([
     create_surge_layout(),
     html.Div(id='surge-graph-container')
     ]), # Includes dropdowns for surge view 
-    # You'll also need to add a hidden div to your layout for the dummy output
+    # Add a hidden div to your layout for the dummy output
     html.Div(id='dummy-div', style={'display': 'none'}),
     html.Div(id='table-content'),  # Placeholder for table data
     html.Div(id='map-content'),    # Placeholder for map data
@@ -1117,6 +1117,17 @@ def display_page(pathname, selected_area):
         surgepage_content_style = {'display': 'none'}                         
     return table_layout_style, map_layout_style, surge_layout_style, home_button_style, homepage_content_style, tablepage_contet_style, mappage_content_style, surgepage_content_style
 
+# Callback to update the map based on the state of the checklists
+@app.callback(
+    Output('checklist-state', 'data'),
+    [Input({'type': 'filter-checklist', 'index': ALL}, 'value')],
+    prevent_initial_call=True
+)
+def update_checklist_state(checklist_values):
+    # Flatten the list of lists to a single list of checked values
+    checked_images = [item for sublist in checklist_values if sublist for item in sublist]
+    return checked_images
+
 app.clientside_callback(
     """
     function(pathname, mapContent, tableContent, surgeContent) {
@@ -1143,9 +1154,8 @@ app.clientside_callback(
      Input('map-area-content', 'children'), 
      Input('table-area-content', 'children'),
      Input('surge-graph-container', 'children')],
-    prevent_initial_call=True    
+    #prevent_initial_call=True    
 )
-
 
 
 if __name__ == '__main__':
