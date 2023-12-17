@@ -260,7 +260,7 @@ def set_specific_areas_options(selected_section):
             {'label': 'Grijó', 'value': 'Grijo'},
             {'label': 'Maia & Gueifães & Castelo da Maia', 'value': 'MaiaGueifaesCasteloMaia'},
             {'label': 'Matosinhos & Foz do Douro', 'value': 'MatosinhosFozDouro'},
-            {'label': 'Porto', 'value': 'Porto'},
+            {'label': 'Porto', 'value': 'PortoCentro'},
             {'label': 'Rio Tinto & Pedrouços & Baguim', 'value': 'RioTintoPedroucosBaguim'},
             {'label': 'São Mamede & Senhora da Hora', 'value': 'SaoMamedeSenhoraHora'},
             {'label': 'Vila do Conde & Póvoa de Varzim', 'value': 'VilaCondePovoaVarzim'},
@@ -497,7 +497,7 @@ def set_specific_table_areas_options(selected_section):
             {'label': 'Grijó', 'value': 'Grijo'},
             {'label': 'Maia & Gueifães & Castelo da Maia', 'value': 'MaiaGueifaesCasteloMaia'},
             {'label': 'Matosinhos & Foz do Douro', 'value': 'MatosinhosFozDouro'},
-            {'label': 'Porto', 'value': 'Porto'},
+            {'label': 'Porto', 'value': 'PortoCentro'},
             {'label': 'Rio Tinto & Pedrouços & Baguim', 'value': 'RioTintoPedroucosBaguim'},
             {'label': 'São Mamede & Senhora da Hora', 'value': 'SaoMamedeSenhoraHora'},
             {'label': 'Vila do Conde & Póvoa de Varzim', 'value': 'VilaCondePovoaVarzim'},
@@ -713,11 +713,12 @@ def generate_html_table(df_page, sort_by=None, sort_direction='asc'):
      Input('specific-table-areas-dropdown', 'value'),
      Input({'type': 'pagination-button', 'index': ALL}, 'n_clicks'),
      Input('specific-areas-dropdown', 'value'),
-     Input('surge-specific-dropdown', 'value')],
+     Input('surge-specific-dropdown', 'value'),
+     Input('table-search-input', 'value')],
     [State('url', 'pathname'),
      State('selected-table-area-store', 'data')]
 )
-def handle_navigation(to_table_clicks, to_map_clicks, to_surge_clicks, to_home_clicks, selected_table_area, pagination_clicks, selected_map_area, selected_surge_section, current_path, stored_area):
+def handle_navigation(to_table_clicks, to_map_clicks, to_surge_clicks, to_home_clicks, selected_table_area, pagination_clicks, selected_map_area, selected_surge_section, search_input, current_path, stored_area):
     ctx = dash.callback_context
     if not ctx.triggered:
         return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
@@ -726,7 +727,12 @@ def handle_navigation(to_table_clicks, to_map_clicks, to_surge_clicks, to_home_c
     selected_stored_area = stored_area['selected_table_area'] if stored_area else selected_table_area    
 
     # Handle table and map navigation
-    if 'to-table' in trigger_id:
+    # If the search input is the trigger, reset to page 1
+    if 'table-search-input' in trigger_id:
+        selected_stored_area = stored_area['selected_table_area'] if stored_area else selected_table_area
+        new_path = f'/table-areas/{selected_stored_area}/page=1'
+        return new_path, {'selected_table_area': selected_stored_area}, dash.no_update, dash.no_update, dash.no_update
+    elif 'to-table' in trigger_id:
         return '/table-areas', None, dash.no_update, None, None
     elif 'to-map' in trigger_id:
         return '/map-areas', dash.no_update, None, None, None
@@ -832,7 +838,6 @@ def update_table_area_content(pathname, event_type, selected_table_area, sort_cl
     pagination_controls = generate_pagination_controls(current_page, page_count)
 
     return table, pagination_controls, sorting_state
-
 
 homepage_content = html.Div([
     #html.Img(src="assets/wallpapperpogo.png", style={'width': '50%', 'height': '50%', 'marginLeft': 'auto', 'marginRight': 'auto'}),
