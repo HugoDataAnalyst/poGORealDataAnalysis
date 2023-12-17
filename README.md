@@ -3,7 +3,7 @@ To do:
 
 Adjust the main wallpapper image; ✔
 
-Add all areas and adjust proper images for the pokémons;
+Add all areas and adjust proper images for the pokémons;✔
 
 Add script + crontab to delete temporary files;
 
@@ -20,7 +20,7 @@ Correct SQL 'percentage query' and re-think the importance of some metrics✔
 Verify Table Slider-bar, it's missing✔
 
 Add names to map visual?
-Bug on  search - reset to page 1 when Search by name
+Bug on  search - reset to page 1 when Search by name✔
 
 Nests in to map visualization as a geofence?
 Add ditto logic?
