@@ -16,6 +16,7 @@ from urllib.parse import parse_qs, urlparse
 sys.path.insert(0, '../Python/')
 sys.path.insert(0, '../Dash/')
 from map_geofence import generate_map_visual
+from dash.dependencies import ClientsideFunction
 
 import plotly.graph_objects as go
 from datetime import datetime
@@ -115,7 +116,7 @@ def create_surge_layout():
         'borderBottom': '2px solid #007BFF',  # Only the bottom border is blue and slightly thicker
         'borderRadius': '0px',
         'padding': '5px',
-        'marginBottom': '0px',
+        'marginBottom': '10px',
         'fontWeight': 'bold',
         'cursor': 'pointer'
     }   
@@ -144,7 +145,7 @@ def create_surge_layout():
             placeholder='Please Select a Metric',            
             style=dropdown_style
         ),
-    ], style={'margin': '5%'})
+    ], style={'margin': '10%'})
 
 # Callback to update surge dropdown based on section selection
 @app.callback(
@@ -195,7 +196,7 @@ def update_surge_graph(surge_event_type, selected_surge_section):
     # Return a Graph component to display the figure
     #return dcc.Graph(figure=fig)
     # Wrap the Graph component in a Div and apply margin styling
-    return html.Div(dcc.Graph(figure=fig), style={'margin': '5%', 'marginLeft': 'auto', 'marginRight': 'auto', 'width': 'fit-content'})
+    return html.Div(dcc.Graph(figure=fig), style={'margin': '10%', 'marginLeft': 'auto', 'marginRight': 'auto', 'width': 'fit-content'})
 
 # Function to create map layout
 def create_map_layout():
@@ -206,7 +207,7 @@ def create_map_layout():
         'borderBottom': '2px solid #007BFF',  # Only the bottom border is blue and slightly thicker
         'borderRadius': '0px',
         'padding': '5px',
-        'marginBottom': '0px',
+        'marginBottom': '10px',
         'fontWeight': 'bold',
         'cursor': 'pointer'
     }      
@@ -244,7 +245,7 @@ def create_map_layout():
         ),
         html.Div(id='map-area-content'),
         dcc.Store(id='checklist-state', data=[])
-    ], style={'margin': '5%'})
+    ], style={'margin': '10%'})
 
 # Callback to update areas dropdown based on section selection
 @app.callback(
@@ -398,12 +399,12 @@ def update_map_content(pathname, event_type, selected_area, checklist_state):
                                 )
                             ]) for image in unique_images_sorted
                         ],
-                        style={'display': 'grid', 'gridTemplateColumns': 'repeat(6, 1fr)', 'gap': '10px', 'overflowY': 'scroll', 'maxHeight': '400px', 'width': '50%', 'margin': '5%'},
+                        style={'display': 'grid', 'gridTemplateColumns': 'repeat(auto-fit, minmax(50px, 1fr))', 'gap': '10px', 'overflowY': 'scroll', 'maxHeight': '400px', 'width': '50%', 'margin': '10%'},
                     ),
                 ],
                 style={'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center', 'marginTop': '10px'}
             )
-        ], style={'margin': '5%', 'marginLeft': 'auto', 'marginRight': 'auto'})
+        ], style={'margin': '10% 10%', 'marginLeft': 'auto', 'marginRight': 'auto'})
     except Exception as e:
         return html.Div(f"Error loading data: {e}")
 
@@ -416,7 +417,7 @@ def create_table_layout():
         'borderBottom': '2px solid #007BFF',  # Only the bottom border is blue and slightly thicker
         'borderRadius': '0px',
         'padding': '5px',
-        'marginBottom': '0px',
+        'marginBottom': '10px',
         'fontWeight': 'bold',
         'cursor': 'pointer'
     }
@@ -479,7 +480,7 @@ def create_table_layout():
         html.Div(id='table-area-content'),
         html.Div(id='pagination-placeholder'),
         dcc.Store(id='table-sort-state', data={'column': None, 'direction': 'asc'})
-    ], style={'margin': '5%'})
+    ], style={'margin': '10%'})
 
 # Callback to update areas dropdown (for table)
 @app.callback(
@@ -626,7 +627,7 @@ def generate_pagination_controls(current_page, page_count, max_visible_pages=4):
     pagination_component = html.Ul(pagination_items, className="pagination")
 
     # Wrap the pagination in a Div and apply margin styling
-    return html.Div(pagination_component, style={'margin': '5%', 'marginLeft': 'auto', 'marginRight': 'auto'})
+    return html.Div(pagination_component, style={'margin': '3% 10%', 'marginLeft': 'auto', 'marginRight': 'auto'})
 
 # Function to generate HTML table with images and delimiter bars
 def generate_html_table(df_page, sort_by=None, sort_direction='asc'):
@@ -696,7 +697,7 @@ def generate_html_table(df_page, sort_by=None, sort_direction='asc'):
         striped=True, bordered=True, hover=True, responsive=True
     )
     # Wrap the table in a Div and apply margin styling
-    return html.Div(table_component, style={'margin': '5%', 'marginLeft': 'auto', 'marginRight': 'auto', 'maxWidth': '100%'})
+    return html.Div(table_component, style={'margin': '0 10%', 'marginLeft': 'auto', 'marginRight': 'auto', 'maxWidth': '100%'})
 
 # Modified handle_navigation callback
 @app.callback(
@@ -940,6 +941,16 @@ surgepage_content = html.Div([
     ''', style={'margin': '5%', 'textAlign': 'justify'})
 ], id='surgepage-content')
 
+# Button Container to create a proper margin with the footer.
+
+# Define the footer
+footer = html.Footer(
+    [
+        html.Div("Developed by @Hugo Gomes", style={'textAlign': 'left', 'display': 'inline-block', 'margin': '10px'}),
+        html.Div("Development Date: 17-12-2023", style={'textAlign': 'right', 'display': 'inline-block', 'float': 'right', 'margin': '10px'})
+    ],
+    style={'position': 'fixed', 'bottom': 0, 'width': '100%', 'backgroundColor': '#f8f9fa'}
+)
 
 # Main app layout with URL routing
 app.layout = html.Div([
@@ -961,7 +972,8 @@ app.layout = html.Div([
                 'display': 'inline-block',
                 'font-size': '16px',
                 'border-radius': '5px',
-                'cursor': 'pointer'
+                'cursor': 'pointer',
+                'marginBottom': '10px'
             }),
             html.Button('Map View', id='to-map', style={
                 'margin-right': '10px',
@@ -974,7 +986,8 @@ app.layout = html.Div([
                 'display': 'inline-block',
                 'font-size': '16px',
                 'border-radius': '5px',
-                'cursor': 'pointer'
+                'cursor': 'pointer',
+                'marginBottom': '10px'
             }),
             html.Button('Activity Peaks', id='to-surge', style={
                 'margin-right': '10px',
@@ -987,7 +1000,8 @@ app.layout = html.Div([
                 'display': 'inline-block',
                 'font-size': '16px',
                 'border-radius': '5px',
-                'cursor': 'pointer'
+                'cursor': 'pointer',
+                'marginBottom': '10px'
             }),
             html.Button('Home', id='to-home', style={
                 'display': 'none',
@@ -1000,7 +1014,8 @@ app.layout = html.Div([
                 'display': 'inline-block',
                 'font-size': '16px',
                 'border-radius': '5px',
-                'cursor': 'pointer'
+                'cursor': 'pointer',
+                'marginBottom': '10px'
             }),
         ],
         style={
@@ -1008,10 +1023,11 @@ app.layout = html.Div([
             'justify-content': 'center',
             'align-items': 'center',
             'flex-direction': 'row',
-            'margin-top': '20px',
-            'margin-bottom': '20px'
+            'margin-top': '10px',
+            'margin-bottom': '80px'
         }
     ),
+    footer,    
     dcc.Store(id='sorting-state', data={'column': None, 'direction': 'asc'}),
     dcc.Store(id='selected-table-area-store'),
     # Layout for table and map view
@@ -1021,11 +1037,12 @@ app.layout = html.Div([
     create_surge_layout(),
     html.Div(id='surge-graph-container')
     ]), # Includes dropdowns for surge view 
+    # You'll also need to add a hidden div to your layout for the dummy output
+    html.Div(id='dummy-div', style={'display': 'none'}),
     html.Div(id='table-content'),  # Placeholder for table data
     html.Div(id='map-content'),    # Placeholder for map data
 
 ])
-
 
 # Callback for updating the page content based on URL and showing/hiding pagination
 @app.callback(
@@ -1043,17 +1060,18 @@ app.layout = html.Div([
 def display_page(pathname, selected_area):
     # Define the base style for the home button
     base_home_button_style = {
-        'background-color': '#007BFF',
-        'color': 'white',
-        'border': 'none',
-        'padding': '10px 20px',
-        'text-align': 'center',
-        'text-decoration': 'none',
-        'display': 'inline-block',
-        'font-size': '16px',
-        'border-radius': '5px',
-        'cursor': 'pointer',
-        'margin': '5px'
+            'margin-right': '10px',
+            'background-color': '#007BFF',
+            'color': 'white',
+            'border': 'none',
+            'padding': '10px 20px',
+            'text-align': 'center',
+            'text-decoration': 'none',
+            'display': 'inline-block',
+            'font-size': '16px',
+            'border-radius': '5px',
+            'cursor': 'pointer',
+            'marginBottom': '10px'
     }
 
     if pathname.startswith('/table-areas'):
@@ -1094,18 +1112,38 @@ def display_page(pathname, selected_area):
         surgepage_content_style = {'display': 'none'}                         
     return table_layout_style, map_layout_style, surge_layout_style, home_button_style, homepage_content_style, tablepage_contet_style, mappage_content_style, surgepage_content_style
 
-
-# Callback to update the map based on the state of the checklists
-@app.callback(
-    Output('checklist-state', 'data'),
-    [Input({'type': 'filter-checklist', 'index': ALL}, 'value')],
-    prevent_initial_call=True
+app.clientside_callback(
+    """
+    function(pathname, mapContent, tableContent, surgeContent) {
+        if(pathname.includes('/map-areas') && mapContent) {
+            setTimeout(function() {
+                window.scrollToElement('map-area-content');
+            }, 500); // Adjust the timeout as needed
+        }
+        else if(pathname.includes('/table-areas') && tableContent) {
+            setTimeout(function() {
+                window.scrollToElement('table-area-content');
+            }, 500); // Adjust the timeout as needed
+        }
+        else if(pathname.includes('/surge') && surgeContent) {
+            setTimeout(function() {
+                window.scrollToElement('surge-graph-container');
+            }, 500); // Adjust the timeout as needed
+        }
+        return '';
+    }
+    """,
+    Output('dummy-div', 'children'),
+    [Input('url', 'pathname'), 
+     Input('map-area-content', 'children'), 
+     Input('table-area-content', 'children'),
+     Input('surge-graph-container', 'children')],
+    prevent_initial_call=True    
 )
-def update_checklist_state(checklist_values):
-    # Flatten the list of lists to a single list of checked values
-    checked_images = [item for sublist in checklist_values if sublist for item in sublist]
-    return checked_images
+
+
 
 if __name__ == '__main__':
-    app.run_server(debug=False, host='0.0.0.0', port=8065)
-    #app.run_server(debug=True, port=8065)
+    #app.run_server(debug=False, port=8065)    
+    #app.run_server(debug=False, host='0.0.0.0', port=8065)
+    app.run_server(debug=True, port=8065)

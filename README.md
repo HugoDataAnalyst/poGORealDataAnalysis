@@ -13,7 +13,7 @@ Test optimization queries;✔
 
 edit queryscript.py sql code to optimize it or not;✔
 
-Test queryscript.py
+Test queryscript.py✔
 
 Verify table values positioning and Pokémon %✔
 Correct SQL 'percentage query' and re-think the importance of some metrics✔
@@ -24,6 +24,8 @@ Bug on  search - reset to page 1 when Search by name
 
 Nests in to map visualization as a geofence?
 Add ditto logic?
+
+Add JS to scroll to the creation of the visuals; ✔
 
 Clear queryscript.py and update it with the update table statements for the needed queries of the league ranks;✔
 
