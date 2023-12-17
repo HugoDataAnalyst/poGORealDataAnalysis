@@ -695,7 +695,12 @@ surgeglobal options - Processes surge data for global trends. Options:
     littletop1 NE or LF
     greatop1 NE or LF
     ultratop1 NE or LF
-    Example: iv100NE""")
+    Example: iv100NE
+
+all - runs all previous query options, except createpvpcolumns and updatepvptables
+
+Execution: python queryscript.py host dbname dbuser dbpassword query_option
+    """)
 
     args = parser.parse_args()
     main(args.host, args.db_name, args.user, args.password, args.query_option)

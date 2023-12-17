@@ -1,7 +1,7 @@
-dash==2.13.0
-dash-bootstrap-components==1.5.0
-folium==0.15.0
-pandas==2.0.3
+dash
+dash-bootstrap-components
+folium
+pandas
 cryptography
 pymysql
 numpy
