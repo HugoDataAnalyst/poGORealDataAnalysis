@@ -1154,11 +1154,11 @@ app.clientside_callback(
      Input('map-area-content', 'children'), 
      Input('table-area-content', 'children'),
      Input('surge-graph-container', 'children')],
-    #prevent_initial_call=True    
+     prevent_initial_call=True    
 )
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False, port=8065)    
-    #app.run_server(debug=False, host='0.0.0.0', port=8065)
+    #app.run_server(debug=False, port=8065)    
+    app.run_server(debug=False, host='0.0.0.0', port=8065)
     #app.run_server(debug=True, port=8065)
