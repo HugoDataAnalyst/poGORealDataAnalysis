@@ -1,4 +1,4 @@
-# PoGO Game Data Analysis
+# PoGO Game Data Analysis - [LIVE DEMO](https://godata.databyhugo.com/)
 ![PokémonGO](https://github.com/HugoDataAnalyst/poGORealDataAnalysis/blob/main/Dash/UICONS/misc/pogodex.png)
 
 This project revolves around real game data from the widely popular video game Pokémon GO. It encompasses the analysis of 49 million Pokémon observations across multiple areas (geofences) during distinct in-game periods (Event vs. No Event). The analysis is presented through three interactive visualization options:
@@ -66,7 +66,7 @@ Thanks to Dash I was able to host it by simply running python [stats_pogo_dash.p
 
 The [dashboard](https://github.com/HugoDataAnalyst/poGORealDataAnalysis/blob/main/Dash/stats_pogo_dash.py), hosted on an Ubuntu server, was made production-ready using [NGINX](https://github.com/HugoDataAnalyst/poGORealDataAnalysis/blob/main/NGINX/nginx_example.conf) for secure traffic redirection and domain protection.
 
-## Limitations & Further Improvments
+## Limitations & Further Improvements
 
 **Limitations:**
 
