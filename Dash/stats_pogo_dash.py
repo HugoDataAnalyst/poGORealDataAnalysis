@@ -923,7 +923,7 @@ mappage_content = html.Div([
         **Key Considerations:** 
         - Rarity influences data interpretation. 
         - Infrequent appearances of certain Pokémon may alter location insights. 
-        - When Pokémon with numerous observations are central on the map, it suggests a bias toward a specific location, indicating their potential presence in the surrounding areas.
+        - When numerous observations of a Pokémon are centered on the map, it indicates a lack of bias towards any specific location, suggesting they can be found across various areas. Conversely, if observations are not centralized, it points to a bias towards certain locations, highlighting specific spots where these Pokémon are more likely to appear.
     ''', style={'margin': '5%', 'textAlign': 'justify'})
 ], id='mappage-content')
 
